@@ -1,5 +1,7 @@
 package com.sanchez.topbloctest;
 
+import resources.ExcelUtilities;
+
 /**
  * Hello world!
  *
@@ -8,6 +10,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        ExcelUtilities xc = new ExcelUtilities();
+        xc.readExcelFile("src/main/assets/Test Retake Scores.xlsx");
     }
 }
