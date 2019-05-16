@@ -9,9 +9,18 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 
+/**
+ * Excel reader class for single sheet workbook.
+ */
 public class ExcelUtilities {
-
+    /**
+     * Reads a single sheet as row and columns.
+     * @param path filepath to target file
+     * @return Arraylist storing rows of linked list storing columns in String form
+     */
     public ArrayList<LinkedList<String>> readExcelFile(String path){
+
+        ArrayList<LinkedList<String>> retVal = new ArrayList<>();
 
         File fp = new File(path);
         try(InputStream inp = new FileInputStream(fp)){
@@ -21,32 +30,35 @@ public class ExcelUtilities {
             int firstRow = sheet.getFirstRowNum();
             int lastRow  = sheet.getLastRowNum();
 
-            for(int i = firstRow; i < lastRow; i++){
+            for(int i = firstRow; i <= lastRow; i++){
                 Row row = sheet.getRow(i);
+                LinkedList<String> columnString = new LinkedList<>();
 
                 for(int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++){
                     Cell cell = row.getCell(j);
 
+
                     switch(cell.getCellType()){
 
                         case STRING:
-                            System.out.println(cell.getRichStringCellValue().getString());
+                            columnString.add(cell.getStringCellValue());
                             break;
 
                         case NUMERIC:
                             if (DateUtil.isCellDateFormatted(cell)) {
                                 System.out.println(cell.getDateCellValue());
                             } else {
-                                System.out.println(cell.getNumericCellValue());
+                                columnString.add(Double.toString(cell.getNumericCellValue()));
                             }
                             break;
                     }
                 }
+                retVal.add(columnString);
             }
         }
         catch(Exception e){
             e.printStackTrace();
         }
-        return null;
+        return retVal;
     }
 }
