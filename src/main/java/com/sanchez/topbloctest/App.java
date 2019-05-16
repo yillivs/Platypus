@@ -1,13 +1,14 @@
 package com.sanchez.topbloctest;
 
+import com.sanchez.topbloctest.Driver;
 /**
- * Hello world!
  *
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Driver program = new Driver();
+        program.run();
     }
 }
