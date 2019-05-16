@@ -40,7 +40,6 @@ public class HttpRequest {
             json.put("average", average);
             json.put("studentIds", femaleCS);
 
-
             OutputStream os = connection.getOutputStream();
             OutputStreamWriter writer = new OutputStreamWriter(os, "UTF-8");
             writer.write(json.toString());

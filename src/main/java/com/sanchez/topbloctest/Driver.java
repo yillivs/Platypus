@@ -37,6 +37,5 @@ public class Driver {
         HttpRequest httpUtility = new HttpRequest();
         httpUtility.sendPost("http://3.86.140.38:5000/challenge", "oliver.d.sanchez@wmich.edu",
                 "Oliver Sanchez", avg, femaleCSIDs);
-
     }
 }
