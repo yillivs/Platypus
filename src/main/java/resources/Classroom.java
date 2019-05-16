@@ -33,7 +33,6 @@ public class Classroom{
      * @param retake Condition on whether the input scores are retakes or not
      */
     public void populateStudentScores(ArrayList<Student> classroom, ArrayList<LinkedList<String>> scores, boolean retake){
-        Collections.sort(classroom);
         for (int i = 1; i < scores.size(); i++){
             int scoreID = (int)Double.parseDouble(scores.get(i).get(0));
             int score = (int)Double.parseDouble(scores.get(i).get(1));
@@ -52,6 +51,42 @@ public class Classroom{
                     classroom.get(studentIndex).setFirstScore(score);
             }
         }
+    }
+
+    /**
+     * Computes the average test scores for all students
+     * @param classroom ArrayList of all students
+     * @return average exam scored rounded to the closest int
+     */
+    public int averageTestScore(ArrayList<Student> classroom){
+        int aggregate = 0;
+        for (Student pupil: classroom) {
+            if(pupil.getDidRetake()){
+                if(pupil.getFirstScore() >= pupil.getSecondScore()){
+                    aggregate += pupil.getFirstScore();
+                }
+                else
+                    aggregate += pupil.getSecondScore();
+            }
+            else
+                aggregate += pupil.getFirstScore();
+        }
+        return aggregate/classroom.size();
+    }
+
+    /**
+     * reads and ArrayList of students and finds all female CS students
+     * @param classroom an ArrayList of Students
+     * @return an ArrayList of female CS students IDs as string
+     */
+    public ArrayList<String> getFemaleCSStudents(ArrayList<Student> classroom){
+        ArrayList<String> femaleCS = new ArrayList<>();
+        for(Student pupil: classroom) {
+            if((pupil.getGender() == 'F') && (pupil.getMajor().equalsIgnoreCase("computer science"))){
+                femaleCS.add(Integer.toString(pupil.getStudentId()));
+            }
+        }
+        return femaleCS;
     }
 }
 

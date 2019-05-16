@@ -1,11 +1,14 @@
 package com.sanchez.topbloctest;
 
-import com.sanchez.topbloctest.Driver;
 /**
- *
+ * Top level class
  */
 public class App 
 {
+    /**
+     * Delegates flow to driver
+     * @param args arguments vector
+     */
     public static void main( String[] args )
     {
         Driver program = new Driver();
